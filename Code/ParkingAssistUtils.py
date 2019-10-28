@@ -40,10 +40,10 @@ def sampleImage(VID_PATH, image_num = 1):
         img = frame
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         output.append(img)
-        i = i +1
+        i = i + 1
         if (i == image_num):
             break
     cap.release()
-    return img
+    return output
 
 
