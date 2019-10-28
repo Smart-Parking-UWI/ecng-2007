@@ -1,3 +1,8 @@
+"""
+Author: Tyrel Cadogan
+Project: encg 2007 Programming project 
+"""
+
 import json
 import cv2
 import numpy as np
@@ -18,7 +23,7 @@ def getCrop(region, img):
     """
     Obtain Crop from Image
     """
-    return img[int(r[1]):int(r[1]+r[3]), int(r[0]):int(r[0]+r[2])]
+    return img[int(region[1]):int(region[1]+region[3]), int(region[0]):int(region[0]+region[2])]
 ################################################################################
 def sampleImage(VID_PATH, image_num = 1):
     """
@@ -31,7 +36,7 @@ def sampleImage(VID_PATH, image_num = 1):
     cap = cv2.VideoCapture(VID_PATH)
     i = 0;
     while(cap.isOpened()):
-        ret, frame = cap0.read()
+        ret, frame = cap.read()
         img = frame
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         output.append(img)
