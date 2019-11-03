@@ -47,6 +47,11 @@ def sampleImage(VID_PATH, image_num = 1):
     return output
 
 def countCars(output_dict, check_list = [3,4,7,6,8]):
+    """
+    output_dict - output diction from model
+    check_list - the index of the objects to count
+    """
+
     count = 0
     for i in range(output_dict["num_detections"]):
         if(output_dict["detection_classes"][i] in check_list and 
