@@ -7,6 +7,16 @@ import json
 import cv2
 import numpy as np
 
+import tensorflow as tf
+
+import numpy as np
+import os
+
+from ParkingAssistUtils import * 
+
+
+
+
 def regionSelection(img):
     """
     Performs Region Selection and Returns region coordinates r and sample image crop
@@ -46,16 +56,30 @@ def sampleImage(VID_PATH, image_num = 1):
     cap.release()
     return output
 
+ 
 def countCars(output_dict, check_list = [3,4,7,6,8]):
     """
     output_dict - output diction from model
     check_list - the index of the objects to count
     """
-
     count = 0
+    
     for i in range(output_dict["num_detections"]):
         if(output_dict["detection_classes"][i] in check_list and 
            (output_dict['detection_scores'][i] > .90) ):
             count +=1
     return count
-                   
+
+def mutlpleRegionSelector(img):
+    region_list = []
+    car_count_list = []
+    while(1):
+        print("Please Select a region")
+        region, img_crop = regionSelection(img)
+        car_count = input("Please Enter the number of car spaces in this region: ")
+        region_list.append(region)
+        car_count_list.append(car_count)
+        print("Do you wish to continue?(y/n)")
+        continue_check = input("Enter your input: ")
+        if(continue_check =="n"): break
+    return (region_list, car_count_list) 
