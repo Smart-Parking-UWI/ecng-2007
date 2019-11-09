@@ -1,21 +1,17 @@
 """
 Author: Tyrel Cadogan
-Project: encg 2007 Programming project 
+Project: Encg 2007 Programming project 
 """
 
 import json
 import cv2
 import numpy as np
-
 import tensorflow as tf
-
 import numpy as np
 import os
-
-from ParkingAssistUtils import * 
-
-
-
+import matplotlib.pyplot as plt
+import cvlib as cv
+from cvlib.object_detection import draw_bbox
 
 def regionSelection(img):
     """
@@ -56,20 +52,6 @@ def sampleImage(VID_PATH, image_num = 1):
     cap.release()
     return output
 
- 
-def countCars(output_dict, check_list = [3,4,7,6,8]):
-    """
-    output_dict - output diction from model
-    check_list - the index of the objects to count
-    """
-    count = 0
-    
-    for i in range(output_dict["num_detections"]):
-        if(output_dict["detection_classes"][i] in check_list and 
-           (output_dict['detection_scores'][i] > .90) ):
-            count +=1
-    return count
-
 def mutlpleRegionSelector(img):
     region_list = []
     car_count_list = []
@@ -83,3 +65,13 @@ def mutlpleRegionSelector(img):
         continue_check = input("Enter your input: ")
         if(continue_check =="n"): break
     return (region_list, car_count_list) 
+
+def detect_cars(image):
+    """ 
+    Returns number of cars detected in an image
+    args: 
+        image- image of carpark
+    """
+    bbox, label, conf = cv.detect_common_objects(im)
+    output_image = draw_bbox(im, bbox, label, conf)
+    return len(labels)
