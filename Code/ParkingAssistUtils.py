@@ -3,6 +3,7 @@ Author: Tyrel Cadogan
 Project: Encg 2007 Programming project 
 """
 
+
 import json
 import cv2
 import numpy as np
@@ -12,6 +13,8 @@ import os
 import matplotlib.pyplot as plt
 import cvlib as cv
 from cvlib.object_detection import draw_bbox
+import threading
+
 
 def regionSelection(img):
     """
@@ -25,12 +28,15 @@ def regionSelection(img):
     cv2.destroyAllWindows()
     return  (region, image_crop)
 
+
 def getCrop(region, img):
     """
     Obtain Crop from Image
     """
     return img[int(region[1]):int(region[1]+region[3]), int(region[0]):int(region[0]+region[2])]
 ################################################################################
+
+
 def sampleImage(VID_PATH, image_num = 1):
     """
     Grab frames from stream and output them to a list
@@ -52,7 +58,8 @@ def sampleImage(VID_PATH, image_num = 1):
     cap.release()
     return output
 
-def mutlpleRegionSelector(img):
+
+def multipleRegionSelector(img):
     region_list = []
     car_count_list = []
     while(1):
@@ -66,12 +73,14 @@ def mutlpleRegionSelector(img):
         if(continue_check =="n"): break
     return (region_list, car_count_list) 
 
+
 def detect_cars(image):
     """ 
     Returns number of cars detected in an image
     args: 
         image- image of carpark
     """
-    bbox, label, conf = cv.detect_common_objects(im)
-    output_image = draw_bbox(im, bbox, label, conf)
-    return len(labels)
+    bbox, label, conf = cv.detect_common_objects(image)
+    output_image = draw_bbox(image, bbox, label, conf)
+    return len(label)
+
