@@ -1,0 +1,37 @@
+*{
+  background-color: rgb(176, 216, 216);
+}
+
+#output{
+  color:rgb(206, 16, 16);
+  position: relative;
+  left: 570px;
+  bottom: 35px;
+
+}
+
+#copy{
+  position: relative;
+  top: 500px;
+}
+
+#tgr{
+  color: red;
+  position: relative;
+  left: 570px;
+  bottom :38px;
+}
+
+#heart{
+  color: red;
+  position: relative;
+  left: 646px;
+  bottom :38px;
+}
+
+#eng{
+  color: red;
+  position: relative;
+  left: 660px;
+  bottom :38px;
+}
