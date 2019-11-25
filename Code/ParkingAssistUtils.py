@@ -2,8 +2,6 @@
 Author: Tyrel Cadogan
 Project: Encg 2007 Programming project 
 """
-
-
 import json
 import cv2
 import numpy as np
@@ -49,7 +47,6 @@ def sampleImage(VID_PATH, image_num = 1):
     i = 0;
     while(cap.isOpened()):
         ret, frame = cap.read()
-        img = frame
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         output.append(img)
         i = i + 1
@@ -82,5 +79,6 @@ def detect_cars(image):
     """
     bbox, label, conf = cv.detect_common_objects(image)
     output_image = draw_bbox(image, bbox, label, conf)
+    cv2.imshow("frame", output_image)
     return len(label)
 
